@@ -10,7 +10,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      uploads: []
+      uploads: [],
+      documents: []
     };
   }
 
@@ -31,6 +32,25 @@ class App extends Component {
     }
   };
 
+  generateText = e => {
+    const uploads = this.state.uploads;
+
+    if (uploads.length) {
+      for (let i = 0; i < uploads.length; i++) {
+        Tesseract.recognize(uploads[i], {lang: "eng"})
+          .catch(err => console.log(err))
+          .then(({confidence, text}) => {
+            this.setState({
+              documents: this.state.documents.concat({
+                confidence,
+                text
+              })
+            });
+          });
+      }
+    }
+  };
+
   render() {
     return (
       <div className="App">
@@ -44,9 +64,20 @@ class App extends Component {
               multiple
             />
           </label>
+          <button onClick={this.generateText}>Generate</button>
           <div>
-            {this.state.uploads.map((src, index) => {
-              return <img src={src} key={index} width="400px" />;
+            {this.state.documents.map((src, index) => {
+              return (
+                <div key={index}>
+                  <img src={this.state.uploads[index]} width="400px" alt="" />
+                  <span>
+                    Confidence: {this.state.documents[index].confidence}
+                  </span>
+                  <div>
+                    <p>{this.state.documents[index].text}</p>
+                  </div>
+                </div>
+              );
             })}
           </div>
         </section>
