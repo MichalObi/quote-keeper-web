@@ -53,27 +53,31 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <Header title={title} />
         <section>
-          <label className="fileUploaderContainer">
-            <input
-              id="fileUploader"
-              type="file"
-              onChange={this.handleChange}
-              multiple
-            />
-          </label>
-          <button onClick={this.generateText}>Generate</button>
+          <div>
+            <label className="file">
+              <input
+                id="fileUploader"
+                type="file"
+                onChange={this.handleChange}
+                multiple
+              />
+              <span className="file-custom" />
+            </label>
+            <button onClick={this.generateText}>Generate</button>
+          </div>
           <div>
             {this.state.documents.map((src, index) => {
               return (
-                <div key={index}>
+                <div key={index} className="files-uploads">
                   <img src={this.state.uploads[index]} width="400px" alt="" />
-                  <span>
-                    Confidence: {this.state.documents[index].confidence}
-                  </span>
-                  <div>
+                  <div className="files-uploads__text">
+                    <span>
+                      Confidence:{" "}
+                      <strong>{this.state.documents[index].confidence}</strong>
+                    </span>
                     <p>{this.state.documents[index].text}</p>
                   </div>
                 </div>
