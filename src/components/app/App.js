@@ -39,9 +39,16 @@ class App extends Component {
   generateText = e => {
     this.setState({isGenerating: true});
 
-    const uploads = this.state.uploads;
+    const uploads = this.state.uploads,
+          documents = this.state.documents;
 
     if (uploads.length) {
+
+      if (documents.length && uploads.length < documents.length) {
+        alert("Upload new image first")
+        return false;
+      }
+
       for (let i = 0; i < uploads.length; i++) {
         Tesseract.recognize(uploads[i], {lang: "eng"})
           .catch(err => console.log(err))
