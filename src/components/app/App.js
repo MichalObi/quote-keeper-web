@@ -10,6 +10,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+      isGenerating: false,
       preview: null,
       uploads: [],
       documents: []
@@ -36,6 +37,8 @@ class App extends Component {
   };
 
   generateText = e => {
+    this.setState({isGenerating: true});
+
     const uploads = this.state.uploads;
 
     if (uploads.length) {
@@ -44,6 +47,7 @@ class App extends Component {
           .catch(err => console.log(err))
           .then(({confidence, text}) => {
             this.setState({
+              isGenerating: false,
               preview: null,
               documents: this.state.documents.concat({
                 confidence,
@@ -77,7 +81,11 @@ class App extends Component {
               <img src={this.state.preview} width="200px" alt="preview"/>
             </div> : null}
 
-            <button onClick={this.generateText}>Generate</button>
+            <button
+            onClick={this.generateText}
+            disabled={this.state.isGenerating}>
+              Generate
+            </button>
           </div>
 
           <div>
