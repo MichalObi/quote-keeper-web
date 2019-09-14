@@ -10,6 +10,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+      preview: null,
       uploads: [],
       documents: []
     };
@@ -23,9 +24,11 @@ class App extends Component {
       for (let key in files) {
         if (!files.hasOwnProperty(key)) continue;
 
-        uploads.push(URL.createObjectURL(files[key]));
+        const url = URL.createObjectURL(files[key]);
 
-        this.setState({uploads});
+        uploads.push(url);
+
+        this.setState({uploads, preview: url});
       }
     } else {
       this.setState({uloads: []});
@@ -41,6 +44,7 @@ class App extends Component {
           .catch(err => console.log(err))
           .then(({confidence, text}) => {
             this.setState({
+              preview: null,
               documents: this.state.documents.concat({
                 confidence,
                 text
@@ -66,13 +70,22 @@ class App extends Component {
               />
               <span className="file-custom" />
             </label>
+
+            {this.state.preview ?
+            <div>
+              <h3>Preview of uploaded image</h3>
+              <img src={this.state.preview} width="200px" alt="preview"/>
+            </div> : null}
+
             <button onClick={this.generateText}>Generate</button>
           </div>
+
           <div>
             {this.state.documents.map((src, index) => {
               return (
                 <div key={index} className="files-uploads">
-                  <img src={this.state.uploads[index]} width="400px" alt="" />
+                  <img src={this.state.uploads[index]} width="400px"
+                       alt="" />
                   <div className="files-uploads__text">
                     <span>
                       Confidence:{" "}
