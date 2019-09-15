@@ -78,3 +78,16 @@ button {
   flex-direction: column;
   margin: 0 50px;
 }
+
+.files-preview {
+  display: flex;
+}
+
+.files-preview > div {
+  margin: 0 2px;
+}
+
+.files-preview > diV img {
+  width: 200px;
+  height: 100px;
+}

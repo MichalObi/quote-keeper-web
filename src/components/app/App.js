@@ -11,7 +11,6 @@ class App extends Component {
 
     this.state = {
       isGenerating: false,
-      preview: null,
       uploads: [],
       documents: []
     };
@@ -29,33 +28,30 @@ class App extends Component {
 
         uploads.push(url);
 
-        this.setState({uploads, preview: url});
+        this.setState({uploads: this.state.uploads.concat(uploads)});
       }
-    } else {
-      this.setState({uloads: []});
     }
   };
 
   generateText = e => {
-    this.setState({isGenerating: true});
-
     const uploads = this.state.uploads,
           documents = this.state.documents;
 
     if (uploads.length) {
 
-      if (documents.length && uploads.length < documents.length) {
+      if (documents.length && uploads.length === documents.length) {
         alert("Upload new image first")
         return false;
       }
+
+      this.setState({isGenerating: true, documents: []});
 
       for (let i = 0; i < uploads.length; i++) {
         Tesseract.recognize(uploads[i], {lang: "eng"})
           .catch(err => console.log(err))
           .then(({confidence, text}) => {
             this.setState({
-              isGenerating: false,
-              preview: null,
+              isGenerating: !(i+1 === uploads.length),
               documents: this.state.documents.concat({
                 confidence,
                 text
@@ -82,11 +78,20 @@ class App extends Component {
               <span className="file-custom" />
             </label>
 
-            {this.state.preview ?
-            <div>
-              <h3>Preview of uploaded image</h3>
-              <img src={this.state.preview} width="200px" alt="preview"/>
-            </div> : null}
+            {this.state.uploads.length > 0 ?
+              <div>
+                <h3>Preview of all uploaded images</h3>
+                <div className="files-preview">
+                  {this.state.uploads.map((src, index) => {
+                    return (
+                      <div key={index}>
+                        <img src={this.state.uploads[index]} alt="preview"/>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            : null}
 
             <button
             onClick={this.generateText}
