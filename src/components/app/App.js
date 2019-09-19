@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Header from "../header/Header";
+import Loader from "../loader/Loader";
 import * as Tesseract from "tesseract.js";
 import "./App.css";
 
@@ -99,6 +100,8 @@ class App extends Component {
               Generate
             </button>
           </div>
+
+          {this.state.isGenerating ? <Loader/>: null}
 
           <div>
             {this.state.documents.map((src, index) => {

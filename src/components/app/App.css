@@ -67,7 +67,7 @@ button {
 .files-uploads {
   margin: 10px 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   border-top: 2px solid #c4c4c4;
   border-bottom: 2px solid #c4c4c4;
