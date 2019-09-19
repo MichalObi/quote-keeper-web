@@ -11,13 +11,13 @@ button {
   display: inline-block;
   cursor: pointer;
   height: 50px;
-}
 
-.file input {
-  min-width: 14rem;
-  margin: 0;
-  filter: alpha(opacity=0);
-  opacity: 0;
+  input {
+   min-width: 14rem;
+   margin: 0;
+   filter: alpha(opacity=0);
+   opacity: 0;
+ }
 }
 
 .file-custom {
@@ -37,26 +37,26 @@ button {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-}
 
-.file-custom:after {
-  content: "Choose file...";
-}
+          &:after {
+            content: "Choose file...";
+          }
 
-.file-custom:before {
-  position: absolute;
-  top: -.075rem;
-  right: -.075rem;
-  bottom: -.075rem;
-  z-index: 6;
-  display: block;
-  content: "Browse";
-  padding: .5rem 1rem;
-  line-height: 1.5;
-  color: #555;
-  background-color: #eee;
-  border: .075rem solid #ddd;
-  border-radius: 0 .25rem .25rem 0;
+          &:before {
+            position: absolute;
+            top: -.075rem;
+            right: -.075rem;
+            bottom: -.075rem;
+            z-index: 6;
+            display: block;
+            content: "Browse";
+            padding: .5rem 1rem;
+            line-height: 1.5;
+            color: #555;
+            background-color: #eee;
+            border: .075rem solid #ddd;
+            border-radius: 0 .25rem .25rem 0;
+          }
 }
 
 /* Focus */

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Loader.css";
+import "./Loader.scss";
 
 const Loader = () => {
   return <div class="lds-ring"><div></div><div></div><div></div><div></div></div>;

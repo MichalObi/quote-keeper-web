@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Header from "../header/Header";
 import Loader from "../loader/Loader";
 import * as Tesseract from "tesseract.js";
-import "./App.css";
+import "./App.scss";
 
 const title = "Quote Keeper";
 
@@ -111,8 +111,7 @@ class App extends Component {
                        alt="" />
                   <div className="files-uploads__text">
                     <span>
-                      Confidence:{" "}
-                      <strong>{this.state.documents[index].confidence}</strong>
+                      Confidence: <strong>{this.state.documents[index].confidence}</strong>
                     </span>
                     <p>{this.state.documents[index].text}</p>
                   </div>
