@@ -17,6 +17,8 @@ class App extends Component {
     };
   }
 
+  resetInput = e => e.target.value = null; // for reupload the same file
+
   handleChange = e => {
     const files = e.target.files,
       uploads = [];
@@ -76,6 +78,7 @@ class App extends Component {
                 id="fileUploader"
                 type="file"
                 onChange={this.handleChange}
+                onClick={this.resetInput}
                 multiple
               />
               <span className="file-custom" />
