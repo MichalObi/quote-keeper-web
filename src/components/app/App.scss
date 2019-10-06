@@ -66,12 +66,19 @@ button {
 }
 
 .files-uploads {
+  position: relative;
   margin: 10px 0;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   border-top: 2px solid #c4c4c4;
   border-bottom: 2px solid #c4c4c4;
+
+  button {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+  }
 }
 
 .files-uploads__text {

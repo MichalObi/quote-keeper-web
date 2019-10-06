@@ -101,10 +101,14 @@ class App extends Component {
 
             <button
               onClick={this.generateText}
-              disabled={this.state.isGenerating}>
+              disabled={this.state.isGenerating || this.state.uploads.length === 0}>
               Generate
             </button>
-            <button onClick={this.clearAll}>Clear all</button>
+            <button
+              onClick={this.clearAll}
+              disabled={this.state.uploads.length === 0 && this.state.documents.length === 0}>
+              Clear all
+            </button>
           </div>
 
           {this.state.isGenerating ? <Loader/>: null}
@@ -121,6 +125,7 @@ class App extends Component {
                     </span>
                     <p>{this.state.documents[index].text}</p>
                   </div>
+                  <button>Delete</button>
                 </div>
               );
             })}
