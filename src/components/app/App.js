@@ -63,6 +63,8 @@ class App extends Component {
     }
   };
 
+  clearAll = () => this.setState({uploads: [], documents: []});
+
   render() {
     return (
       <div className="app">
@@ -95,10 +97,11 @@ class App extends Component {
             : null}
 
             <button
-            onClick={this.generateText}
-            disabled={this.state.isGenerating}>
+              onClick={this.generateText}
+              disabled={this.state.isGenerating}>
               Generate
             </button>
+            <button onClick={this.clearAll}>Clear all</button>
           </div>
 
           {this.state.isGenerating ? <Loader/>: null}
