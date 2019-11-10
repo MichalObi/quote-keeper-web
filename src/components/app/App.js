@@ -67,6 +67,19 @@ class App extends Component {
 
   clearAll = () => this.setState({uploads: [], documents: []});
 
+  clearSelected = index => {
+    const uploads = [...this.state.uploads],
+          documents = [...this.state.documents];
+
+          uploads.splice(index, 1);
+          documents.splice(index, 1);
+
+    this.setState({
+      uploads,
+      documents
+    });
+  }
+
   render() {
     return (
       <div className="app">
@@ -125,7 +138,10 @@ class App extends Component {
                     </span>
                     <p>{this.state.documents[index].text}</p>
                   </div>
-                  <button>Delete</button>
+                  <button key={index}
+                    onClick={() => this.clearSelected(index)}>
+                    Delete
+                  </button>
                 </div>
               );
             })}
